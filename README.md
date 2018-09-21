@@ -1,5 +1,4 @@
 # Udacity-Projects
 Repository for all things related to Udacity
 
-Tree should be Udacity > Course name > Curriculum > Project
-2
+Tree should be Udacity > Course name > Curriculum > Lesson > Project
