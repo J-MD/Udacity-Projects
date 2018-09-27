@@ -1,0 +1,11 @@
+To use this program you will need software able to run Python, such as IDLE.
+
+To create the webpage follow these steps:
+ - Open the file entertainment_center.py in the program IDLE.
+ - Run the module via Run > Run Module (or F5)
+
+ Running this program will generate an HTML file and automatically open it.
+ The HTML file is called: fresh_tomatoes.html.
+
+ If you want to add movies to be displayed on the website, do so in the file MovieList.py.
+ Create a new Movie object for the movie you would like to add and then add it to the array - list.

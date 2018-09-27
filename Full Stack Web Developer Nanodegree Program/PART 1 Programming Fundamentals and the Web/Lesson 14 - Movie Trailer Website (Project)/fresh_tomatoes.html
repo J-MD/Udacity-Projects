@@ -1,10 +1,4 @@
-import webbrowser
-import os
-import re
 
-
-# Styles and scripting for the page
-main_page_head = '''
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -90,11 +84,7 @@ main_page_head = '''
             });*/
         </script>
     </head>
-    '''
-
-
-    # The main page layout and title bar
-main_page_content = '''
+    
     <body>
         <!-- Trailer Video Modal -->
         <div class="modal" id="trailer">
@@ -121,60 +111,38 @@ main_page_content = '''
                 </div>
             </div>
             <div class="container-fluid MovieContainer">
-                {movie_tiles}
+                
+            <div class="row">
+                <div class="col-sm-3 movie-tile" data-trailer-youtube-id="eOrNdBpGMv8" data-toggle="modal" data-target="#trailer">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_CR0,0,675,1000_AL_.jpg" width="100%" height="100%">
+                </div>
+                <div class="col-sm-9" align="center">
+                    <h1>The Avengers</h1>
+                    <h2>Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 movie-tile" data-trailer-youtube-id="tmeOjFno6Do" data-toggle="modal" data-target="#trailer">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SY1000_SX675_AL_.jpg" width="100%" height="100%">
+                </div>
+                <div class="col-sm-9" align="center">
+                    <h1>Avengers: Age of Ultron</h1>
+                    <h2>When Tony Stark and Bruce Banner try to jump-start a dormantpeacekeeping program called Ultron, things go horribly wrong and it's up to Earth's mightiest heroes to stop the villainous Ultron from enacting his terrible plan.</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 movie-tile" data-trailer-youtube-id="6ZfuNTqbHE8" data-toggle="modal" data-target="#trailer">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SY1000_CR0,0,674,1000_AL_.jpg" width="100%" height="100%">
+                </div>
+                <div class="col-sm-9" align="center">
+                    <h1>Avengers: Infinity War</h1>
+                    <h2>The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.</h2>
+                </div>
+            </div>
+
             </div>
         </div>
     </body>
 </html>
-'''
-
-# A single movie entry html template
-movie_tile_content = '''
-            <div class="row">
-                <div class="col-sm-3 movie-tile" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-                    <img src="{poster_image_url}" width="100%" height="100%">
-                </div>
-                <div class="col-sm-9" align="center">
-                    <h1>{movie_title}</h1>
-                    <h2>{plot_summary}</h2>
-                </div>
-            </div>
-'''
-
-def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
-    for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
-
-        # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
-            plot_summary=movie.plot,
-            trailer_youtube_id=trailer_youtube_id
-        )
-    return content
-
-
-def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
-
-    # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
-
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
-
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)
