@@ -1,0 +1,7 @@
+body {
+  background-color: blue;
+}
+
+@media screen and (min-width:300px) and (max-width:600px) {
+  
+}
