@@ -12,11 +12,14 @@ module.exports = function(grunt) {
     responsive_images: {
       dev: {
         options: {
-          engine: 'im',
           sizes: [{
+            name: "small",
+            width: 800,
+            suffix: "_x2",
+            quality: 60
             /*
             Change these:
-            
+
             width: ,
             suffix: ,
             quality:
@@ -64,7 +67,7 @@ module.exports = function(grunt) {
       },
     },
   });
-  
+
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
